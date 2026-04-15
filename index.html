@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>BMW Build Advisor — Find the Best BMW for Your Requirements</title>
+<meta name="description" content="Answer 5 questions about budget, use case, and style — get your perfect BMW model recommendation with pros, cons, specs, and custom build tips. Free tool.">
+<meta name="keywords" content="BMW build advisor, which BMW should I buy, BMW model selector, best BMW for me, BMW custom build guide, BMW pros and cons, BMW buying guide 2024, BMW configurator">
+<link rel="canonical" href="https://varsansri.github.io/bmw-build-advisor/">
+<meta property="og:title" content="BMW Build Advisor — Find Your Perfect BMW">
+<meta property="og:description" content="Answer 5 questions, get your perfect BMW model with pros, cons, and build tips. Free, instant, no dealer pressure.">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"BMW Build Advisor","description":"Quiz-based BMW model recommendation tool with pros, cons, and custom build tips based on user requirements.","url":"https://varsansri.github.io/bmw-build-advisor/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0"}}</script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0a0a0f;--surface:#111118;--surface2:#181820;
+  --accent:#00d4ff;--accent-dim:rgba(0,212,255,0.09);--accent-border:rgba(0,212,255,0.28);
+  --text:#efefef;--muted:#6b6b80;--border:rgba(255,255,255,0.07);
+  --green:#00e87a;--green-dim:rgba(0,232,122,0.10);
+  --yellow:#ffd93d;--yellow-dim:rgba(255,217,61,0.10);
+  --red:#ff4d4d;--red-dim:rgba(255,77,77,0.10);
+  --radius:14px;--ease:0.2s ease;
+}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;min-height:100vh;padding-bottom:76px;line-height:1.5}
+.wrap{max-width:500px;margin:0 auto;padding:16px 14px 32px}
+.header{text-align:center;padding:22px 0 18px}
+.badge{display:inline-block;background:var(--accent-dim);border:1px solid var(--accent-border);color:var(--accent);font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:4px 14px;border-radius:20px;margin-bottom:14px}
+h1{font-size:clamp(20px,5.5vw,26px);font-weight:800;line-height:1.25;margin-bottom:8px}
+h1 .hl{color:var(--accent)}
+.tagline{color:var(--muted);font-size:13px;max-width:310px;margin:0 auto}
+h2{font-size:13px;color:var(--muted);font-weight:400;margin-top:4px}
+/* Progress */
+.progress-wrap{margin-bottom:16px}
+.progress-bar{height:4px;background:var(--surface2);border-radius:2px;overflow:hidden;margin-bottom:6px}
+.progress-fill{height:100%;background:var(--accent);border-radius:2px;transition:width .4s ease}
+.progress-label{font-size:11px;color:var(--muted);text-align:right}
+/* Question cards */
+.q-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:18px;margin-bottom:12px}
+.q-num{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--accent);margin-bottom:8px}
+.q-text{font-size:15px;font-weight:700;margin-bottom:14px;line-height:1.35}
+.options{display:flex;flex-direction:column;gap:8px}
+.opt-btn{
+  background:var(--surface2);border:1px solid var(--border);border-radius:10px;
+  padding:12px 14px;text-align:left;cursor:pointer;
+  display:flex;align-items:center;gap:10px;
+  transition:all var(--ease);-webkit-tap-highlight-color:transparent;
+}
+.opt-btn:active{transform:scale(.98)}
+.opt-btn.selected{border-color:var(--accent-border);background:var(--accent-dim)}
+.opt-btn .oe{font-size:20px;flex-shrink:0}
+.opt-btn .ot{flex:1}
+.opt-btn .ot .on{font-size:13px;font-weight:600;color:var(--text)}
+.opt-btn .ot .od{font-size:11px;color:var(--muted);margin-top:1px}
+.opt-btn.selected .on{color:var(--accent)}
+.opt-btn.selected .od{color:rgba(0,212,255,.7)}
+.divider{border:none;border-top:1px solid var(--border);margin:6px 0 14px}
+.next-btn{width:100%;background:var(--accent);color:#000;font-size:14px;font-weight:800;padding:13px;border:none;border-radius:var(--radius);cursor:pointer;transition:opacity var(--ease),transform var(--ease);-webkit-tap-highlight-color:transparent}
+.next-btn:active{opacity:.85;transform:scale(.98)}
+.next-btn:disabled{opacity:.4;cursor:not-allowed}
+/* Results */
+.results{display:none}
+.results.show{display:block;animation:fadeUp .4s ease}
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+/* Recommendation card */
+.rec-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:20px;margin-bottom:12px}
+.rec-header{text-align:center;padding-bottom:16px;border-bottom:1px solid var(--border);margin-bottom:16px}
+.rec-emoji{font-size:48px;display:block;margin-bottom:8px}
+.rec-rank{font-size:10px;color:var(--accent);letter-spacing:2px;text-transform:uppercase;margin-bottom:4px}
+.rec-model{font-size:26px;font-weight:900;color:var(--text);margin-bottom:4px}
+.rec-tagline{font-size:13px;color:var(--muted)}
+.rec-price{font-size:18px;font-weight:700;color:var(--accent);margin-top:8px}
+.match-badge{display:inline-flex;align-items:center;gap:5px;background:var(--green-dim);border:1px solid var(--green);color:var(--green);font-size:12px;font-weight:700;padding:4px 14px;border-radius:20px;margin-top:10px}
+/* Pros / Cons */
+.pc-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px}
+.pc-card{background:var(--surface2);border-radius:10px;padding:12px}
+.pc-title{font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:8px}
+.pc-title.pros{color:var(--green)}
+.pc-title.cons{color:var(--red)}
+.pc-list{list-style:none;display:flex;flex-direction:column;gap:5px}
+.pc-list li{font-size:11px;color:var(--muted);padding-left:14px;position:relative;line-height:1.4}
+.pc-list li::before{content:'';position:absolute;left:0;top:5px;width:6px;height:6px;border-radius:50%}
+.pros-list li::before{background:var(--green)}
+.cons-list li::before{background:var(--red)}
+/* Build tips */
+.build-tips{background:var(--surface2);border-radius:10px;padding:14px;margin-bottom:14px}
+.bt-title{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
+.bt-item{display:flex;gap:8px;margin-bottom:8px;font-size:12px;color:var(--muted);line-height:1.5}
+.bt-item:last-child{margin-bottom:0}
+.bt-item strong{color:var(--text)}
+/* Alt recs */
+.alt-rec{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:16px;margin-bottom:12px}
+.alt-title{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:12px}
+.alt-grid{display:flex;flex-direction:column;gap:8px}
+.alt-item{background:var(--surface2);border-radius:10px;padding:12px;display:flex;align-items:center;gap:10px}
+.alt-emoji{font-size:24px;flex-shrink:0}
+.alt-info{flex:1}
+.alt-model{font-size:13px;font-weight:700}
+.alt-reason{font-size:11px;color:var(--muted);margin-top:2px}
+.alt-price{font-size:12px;color:var(--accent);font-weight:700}
+.restart-btn{width:100%;background:var(--surface2);color:var(--text);font-size:13px;font-weight:700;padding:12px;border:1px solid var(--border);border-radius:var(--radius);cursor:pointer;margin-bottom:12px;-webkit-tap-highlight-color:transparent;transition:all var(--ease)}
+.restart-btn:active{opacity:.8}
+.tg-cta{background:linear-gradient(135deg,rgba(0,212,255,.07),rgba(0,212,255,.01));border:1px solid var(--accent-border);border-radius:var(--radius);padding:18px;margin-bottom:12px}
+.tg-title{font-size:14px;font-weight:700;margin-bottom:6px}
+.tg-body{font-size:12px;color:var(--muted);line-height:1.6;margin-bottom:14px}
+.tg-body strong{color:var(--accent)}
+.tg-btn{display:flex;align-items:center;justify-content:center;gap:8px;background:var(--accent);color:#000;font-weight:800;font-size:13px;padding:12px 20px;border-radius:9px;text-decoration:none;transition:opacity var(--ease);-webkit-tap-highlight-color:transparent}
+.tg-btn:active{opacity:.85}
+.share-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:16px 18px;margin-bottom:12px}
+.share-label{font-size:10px;color:var(--muted);letter-spacing:2px;text-transform:uppercase;margin-bottom:12px}
+.share-btns{display:flex;gap:8px}
+.sb{flex:1;padding:10px;border-radius:8px;font-size:12px;font-weight:700;cursor:pointer;border:1px solid var(--border);background:var(--surface2);color:var(--text);transition:all var(--ease);text-align:center;-webkit-tap-highlight-color:transparent}
+.sb.wa{background:rgba(37,211,102,.08);border-color:rgba(37,211,102,.25);color:#25d366}
+.sb.cp{color:var(--accent);border-color:var(--accent-border)}
+.sb:active{transform:scale(.97)}
+.sticky{position:fixed;bottom:0;left:0;right:0;background:rgba(10,10,15,.96);border-top:1px solid var(--accent-border);padding:10px 16px;display:flex;align-items:center;gap:12px;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);z-index:200}
+.sticky .st{font-size:11px;color:var(--muted);flex:1;line-height:1.4}
+.sticky .st strong{color:var(--accent);font-size:12px;display:block}
+.sticky-btn{background:var(--accent);color:#000;font-weight:800;font-size:11px;padding:8px 14px;border-radius:8px;text-decoration:none;white-space:nowrap;-webkit-tap-highlight-color:transparent}
+footer{text-align:center;padding:12px;font-size:11px;color:var(--muted);opacity:.7}
+footer a{color:var(--accent);text-decoration:none}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="header">
+    <div class="badge">🚗 BMW Advisor</div>
+    <h1>BMW <span class="hl">Build Advisor</span></h1>
+    <h2>Which BMW model is perfect for my requirements?</h2>
+    <p class="tagline">Answer 5 questions. Get your perfect BMW with pros, cons, and build tips. No dealer pressure.</p>
+  </header>
+
+  <div class="progress-wrap">
+    <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+    <div class="progress-label" id="progressLabel">Question 1 of 5</div>
+  </div>
+
+  <div id="quizArea"></div>
+  <div class="results" id="results"></div>
+
+  <footer>Free BMW guide by <a href="https://t.me/DTB_Academy" target="_blank" rel="noopener">DTB Academy</a> · Not affiliated with BMW AG</footer>
+</div>
+
+<div class="sticky">
+  <div class="st"><strong>📊 DTB Academy — Free</strong>Trading signals & money strategies →</div>
+  <a href="https://t.me/DTB_Academy" target="_blank" rel="noopener noreferrer" class="sticky-btn">Join Free</a>
+</div>
+
+<script>
+const questions = [
+  {
+    id:'budget',text:'What is your budget?',
+    options:[
+      {emoji:'💰',name:'Under $35,000',desc:'Entry-level new or good used BMW',value:'entry'},
+      {emoji:'💰💰',name:'$35k – $55,000',desc:'Mid-range new, plenty of options',value:'mid'},
+      {emoji:'💰💰💰',name:'$55k – $80,000',desc:'Premium spec, fully loaded',value:'high'},
+      {emoji:'👑',name:'Over $80,000',desc:'No compromise, full luxury or M-car',value:'luxury'},
+    ]
+  },
+  {
+    id:'use',text:'How will you use it most?',
+    options:[
+      {emoji:'🏙️',name:'Daily Commuter',desc:'City driving, motorway, parking',value:'daily'},
+      {emoji:'👨‍👩‍👧',name:'Family Car',desc:'School runs, road trips, boot space',value:'family'},
+      {emoji:'🏎️',name:'Weekend Fun / Track Days',desc:'Performance, driving feel, thrills',value:'track'},
+      {emoji:'✈️',name:'Long Distance / Travel',desc:'Comfort, range, motorway cruising',value:'travel'},
+    ]
+  },
+  {
+    id:'style',text:'What style matters most to you?',
+    options:[
+      {emoji:'⚡',name:'Sporty & Aggressive',desc:'Low, wide, loud, turns heads',value:'sporty'},
+      {emoji:'🎩',name:'Elegant & Executive',desc:'Refined, understated, premium',value:'elegant'},
+      {emoji:'🏔️',name:'SUV / High Ride',desc:'Commanding position, practicality',value:'suv'},
+      {emoji:'🌿',name:'Eco / Electric',desc:'EV or plug-in hybrid, modern',value:'eco'},
+    ]
+  },
+  {
+    id:'transmission',text:'Transmission preference?',
+    options:[
+      {emoji:'🎯',name:'Manual — 3 Pedals',desc:'Full driver engagement, rare on BMWs now',value:'manual'},
+      {emoji:'🤖',name:'Automatic / ZF 8-speed',desc:'Smooth, fast, BMW\'s best gearbox',value:'auto'},
+      {emoji:'🔋',name:'Electric Drive',desc:'Silent, instant torque, zero gears',value:'electric'},
+      {emoji:'🤷',name:'No Preference',desc:'Whatever suits the car best',value:'any'},
+    ]
+  },
+  {
+    id:'priority',text:'What is your single biggest priority?',
+    options:[
+      {emoji:'🏆',name:'Pure Driving Performance',desc:'Power, handling, lap times',value:'performance'},
+      {emoji:'🛋️',name:'Luxury & Comfort',desc:'Massage seats, silence, refinement',value:'comfort'},
+      {emoji:'📦',name:'Practicality & Space',desc:'Boot size, seats, versatility',value:'practical'},
+      {emoji:'💎',name:'Exclusivity & Status',desc:'Rare, distinctive, impressive',value:'status'},
+    ]
+  },
+];
+
+const models = {
+  M2:{emoji:'⚡',name:'BMW M2',price:'From $65,000',tagline:'The most fun BMW you can buy. Period.',match:90,
+    pros:['Best steering feel of any BMW','Manual gearbox still available','Track-capable straight from showroom','Compact and easy to place on road','Appreciating classic in the making'],
+    cons:['No rear seat usability','Firm ride not for everyone','Expensive for a 2-series badge','Limited boot space','High insurance group'],
+    tips:['Add Competition Pack for freer-revving engine','Avoid sunroof — adds weight above roof','Manual is the soul of this car, choose it if possible','No need for extended leather — keep it focused','Carbon fibre roof worth it on Competition spec']},
+  M3:{emoji:'🏆',name:'BMW M3 / M3 Competition',price:'From $75,000',tagline:'The benchmark sports saloon. Legendary for a reason.',match:92,
+    pros:['4-door practicality with supercar performance','xDrive AWD option for all-weather','Massive tuning aftermarket','Recognisable iconic shape','Resale holds extremely well'],
+    cons:['Controversial front grille divides opinion','Very firm ride in Competition spec','Fuel consumption in sport mode is brutal','High spec options push price over $100k','Complex electronics can feel disconnected'],
+    tips:['Competition spec is worth the premium for engine and suspension','Individual colour (Frozen shades) make it truly unique','Avoid too many options — standard spec is excellent','M Carbon seats are worth adding for track use','Carbon ceramic brakes only if doing track days regularly']},
+  M4:{emoji:'🔥',name:'BMW M4 / M4 Competition',price:'From $77,000',tagline:'The coupe version of the M3 — more dramatic, more desirable.',match:89,
+    pros:['Stunning coupe proportions','Available as convertible for summer','More exclusive than M3 saloon','xDrive Competition is point-and-shoot fast','Huge aftermarket modification potential'],
+    cons:['Same grille controversy as M3','Less practical than M3 (2 doors)','Convertible adds significant weight','Roof pillars reduce visibility','Very popular — not as exclusive as it feels'],
+    tips:['Coupe vs Convertible: Coupe is sharper, Convertible is an experience','Isle of Man Green or San Remo Green make it truly stand out','Hard top is the driver\'s car; convertible is the lifestyle car','M Carbon exterior package transforms the looks significantly','Match with Frozen interior if on Individual spec']},
+  M5:{emoji:'👑',name:'BMW M5 / M5 CS',price:'From $105,000',tagline:'The original super saloon. 600hp in a suit.',match:88,
+    pros:['600hp that can still carry the family','Most practical performance car ever made','Completely transforms between modes','Best BMW of the modern era by many','M5 CS is one of the greatest driver\'s cars ever'],
+    cons:['Heavy — 1,900kg+ affects feel','Options list balloons price quickly','Fuel use is significant if driven hard','Looks subtle — some prefer drama','Very expensive to maintain at performance level'],
+    tips:['M5 CS if budget allows — it\'s in another league','Frozen Black/White exterior makes it look menacing','Merino leather interior is worth the upgrade','Carbon ceramic brakes essential at this performance level','Drive it in Sport+ before buying — it transforms completely']},
+  '3Series':{emoji:'⭐',name:'BMW 3 Series',price:'From $43,000',tagline:'The most balanced car BMW makes. A legend for good reason.',match:91,
+    pros:['Perfect balance of sport and comfort','Most popular BMW ever — parts and service everywhere','330i is the sweet spot engine','Great resale value across all variants','M Sport pack makes it look genuinely sharp'],
+    cons:['Very common — lacks exclusivity','Options add up extremely fast','Diesel variants losing appeal','iDrive can be complex','Faces strong competition from Mercedes C-Class'],
+    tips:['330i (B48 engine) is the sweet spot — avoid 318i','M Sport pack mandatory for the right look','Individual colours make it less common','Avoid the lowest trim — jump to M Sport minimum','Check the options list carefully — essentials only']},
+  '4Series':{emoji:'💎',name:'BMW 4 Series Gran Coupe',price:'From $52,000',tagline:'3 Series style, coupe drama, four doors. Best of everything.',match:87,
+    pros:['4-door coupe combines practicality with style','More distinctive than 3 Series','420i and 430i are excellent engines','Gran Coupe proportions are beautiful','Lower roofline than 3 Series looks premium'],
+    cons:['Larger grille is polarising','Rear headroom reduced vs 3 Series','More expensive than equivalent 3 Series','Boot opening can be tight','Heavier than 3 Series'],
+    tips:['430i is the engine sweet spot for this car','Mineral White or Black Sapphire suit it best','M Sport Pro pack adds the finishing touches','19-inch wheels are the minimum — 20s look best','Gran Coupe over regular coupe for daily usability']},
+  '5Series':{emoji:'🎩',name:'BMW 5 Series',price:'From $58,000',tagline:'The executive saloon that does everything right.',match:86,
+    pros:['Best long-distance car BMW makes','540i engine is exceptional — smooth and powerful','Rear passenger space is genuinely luxurious','Incredibly refined on motorways','M Sport exterior looks properly premium'],
+    cons:['Large — not nimble in cities','Can feel anonymous at this price point','520d diesel still best-seller — not exciting','Options cost can be shocking','Shadow of the 7 Series looms for prestige'],
+    tips:['540i xDrive is the definitive 5 Series engine','Comfort seats with massage for long trips','Gesture control and heads-up display worth adding','Laserlight headlights transform night driving','Individual paint makes it distinctive in the segment']},
+  X3:{emoji:'🏔️',name:'BMW X3 / X3 M40i',price:'From $48,000',tagline:'The best-selling SUV BMW makes. Practical, premium, capable.',match:85,
+    pros:['Perfect family SUV size','M40i engine is genuinely quick','Good boot space and rear room','xDrive standard on most specs','Strong resale values'],
+    cons:['Interior less special than German rivals','M40i fuel consumption','Ride quality can be firm in M Sport','Dealer options inflate price quickly','Not as dynamic as saloon equivalents'],
+    tips:['M40i is worth the premium over 30i','Panoramic roof essential for the airy feel','20-inch M wheels transform the look','Vernasca leather over standard — far nicer','Adaptive suspension essential for UK/EU roads']},
+  X5:{emoji:'👑',name:'BMW X5 / X5 M Competition',price:'From $72,000',tagline:'The large luxury SUV that still drives like a BMW.',match:84,
+    pros:['Commanding road presence','Third row option for 7 seats','xDrive45e plug-in hybrid excellent range','X5 M Competition is absurdly fast','Premium interior rivals Range Rover'],
+    cons:['Very large in city environments','Running costs are significant','X5 M Competition drinks fuel','Options push into Range Rover territory','Common on the road — not exclusive'],
+    tips:['xDrive45e plug-in hybrid is the smart choice for running costs','Sky Lounge panoramic roof makes interior feel incredible','M Sport Pro or M50 spec for the best looks','Night Vision worth adding for rural driving','Bowers & Wilkins sound system is genuinely impressive']},
+  i4:{emoji:'🌿',name:'BMW i4 eDrive40',price:'From $56,000',tagline:'The electric BMW that actually drives like a BMW.',match:88,
+    pros:['0-60 in 5.5 seconds — properly fast','Gran Coupe shape is gorgeous','600km real-world range (eDrive40)','Retains BMW driving dynamics','No compromise interior vs ICE models'],
+    cons:['Charging infrastructure dependency','Longer road trips need planning','Heavier than ICE equivalent','Battery replacement cost concern','Reduced options vs 4 Series equivalent'],
+    tips:['eDrive40 over M50 for range and balance','Charging cable package essential from day one','Heat pump add-on extends winter range significantly','20-inch wheels look best on this shape','Avoid lightest colour — shows charging port area dirt easily']},
+  iX:{emoji:'🔋',name:'BMW iX xDrive50',price:'From $89,000',tagline:'BMW\'s flagship electric SUV. Controversial looks, exceptional tech.',match:82,
+    pros:['Most advanced BMW interior ever built','630km+ real-world range','Incredibly quiet and refined','Gigantic curved display','xDrive instant AWD performance'],
+    cons:['Exterior design is very polarising','Enormous size difficult in urban areas','Expensive relative to Tesla Model X','iDrive learning curve','Aftermarket wheel options limited'],
+    tips:['Sport spec is the sweet spot price/equipment','Bowers & Wilkins Diamond sound is exceptional','Tow bar available — useful for large SUV','Bronze or copper exterior trims make it distinctive','Ceramic coating from new recommended for easy cleaning']},
+};
+
+const scoreMatrix = {
+  budget:{entry:['3Series','X3'],mid:['3Series','4Series','X3','i4'],high:['M3','M4','5Series','X5','i4'],luxury:['M3','M4','M5','X5','iX','M2']},
+  use:{daily:['3Series','4Series','i4','M2','M3'],family:['3Series','X3','X5','5Series'],track:['M2','M3','M4','M5'],travel:['5Series','X5','iX','i4']},
+  style:{sporty:['M2','M3','M4','M5'],elegant:['5Series','4Series','3Series','iX'],suv:['X3','X5','iX'],eco:['i4','iX']},
+  transmission:{manual:['M2','M3'],auto:['M3','M4','M5','3Series','4Series','5Series','X3','X5'],electric:['i4','iX'],any:['M3','3Series','X3','5Series','M2','M4','M5','4Series','X5','iX','i4']},
+  priority:{performance:['M2','M3','M4','M5'],comfort:['5Series','X5','iX'],practical:['X3','X5','3Series'],status:['M5','iX','X5','M4']},
+};
+
+let answers = {};
+let currentQ = 0;
+
+function renderQuestion(){
+  const q = questions[currentQ];
+  const pct = (currentQ / questions.length) * 100;
+  document.getElementById('progressFill').style.width = pct + '%';
+  document.getElementById('progressLabel').textContent = `Question ${currentQ+1} of ${questions.length}`;
+  const area = document.getElementById('quizArea');
+  area.innerHTML = `
+    <div class="q-card">
+      <div class="q-num">Question ${currentQ+1} of ${questions.length}</div>
+      <div class="q-text">${q.text}</div>
+      <div class="options" id="options">
+        ${q.options.map((o,i)=>`
+          <button class="opt-btn" onclick="selectOption(${i},'${o.value}')">
+            <span class="oe">${o.emoji}</span>
+            <span class="ot"><span class="on">${o.name}</span><span class="od">${o.desc}</span></span>
+          </button>`).join('')}
+      </div>
+      <hr class="divider">
+      <button class="next-btn" id="nextBtn" onclick="nextQuestion()" disabled>
+        ${currentQ < questions.length-1 ? 'Next Question →' : 'Find My BMW →'}
+      </button>
+    </div>`;
+}
+
+function selectOption(idx, value){
+  document.querySelectorAll('.opt-btn').forEach(b => b.classList.remove('selected'));
+  document.querySelectorAll('.opt-btn')[idx].classList.add('selected');
+  answers[questions[currentQ].id] = value;
+  document.getElementById('nextBtn').disabled = false;
+}
+
+function nextQuestion(){
+  if (!answers[questions[currentQ].id]) return;
+  if (currentQ < questions.length-1){
+    currentQ++;
+    renderQuestion();
+    window.scrollTo({top:0,behavior:'smooth'});
+  } else {
+    document.getElementById('progressFill').style.width = '100%';
+    document.getElementById('progressLabel').textContent = 'Analysis complete!';
+    showResults();
+  }
+}
+
+function scoreModels(){
+  const scores = {};
+  Object.keys(models).forEach(m => scores[m] = 0);
+  Object.keys(answers).forEach(qId => {
+    const val = answers[qId];
+    const matches = scoreMatrix[qId][val] || [];
+    matches.forEach((m,i) => {
+      if (scores[m] !== undefined) scores[m] += (matches.length - i) * 2;
+    });
+  });
+  return Object.entries(scores).sort((a,b)=>b[1]-a[1]).map(e=>e[0]);
+}
+
+function showResults(){
+  const ranked = scoreModels();
+  const top = ranked[0];
+  const alts = ranked.slice(1,3);
+  const m = models[top];
+  document.getElementById('quizArea').innerHTML = '';
+
+  const res = document.getElementById('results');
+  res.innerHTML = `
+    <div class="rec-card">
+      <div class="rec-header">
+        <span class="rec-emoji">${m.emoji}</span>
+        <div class="rec-rank">⭐ YOUR PERFECT BMW</div>
+        <div class="rec-model">${m.name}</div>
+        <div class="rec-tagline">${m.tagline}</div>
+        <div class="rec-price">${m.price}</div>
+        <div class="match-badge">✓ ${m.match}% requirements match</div>
+      </div>
+
+      <div class="pc-grid">
+        <div class="pc-card">
+          <div class="pc-title pros">✓ PROS</div>
+          <ul class="pc-list pros-list">${m.pros.map(p=>`<li>${p}</li>`).join('')}</ul>
+        </div>
+        <div class="pc-card">
+          <div class="pc-title cons">✕ CONS</div>
+          <ul class="pc-list cons-list">${m.cons.map(c=>`<li>${c}</li>`).join('')}</ul>
+        </div>
+      </div>
+
+      <div class="build-tips">
+        <div class="bt-title">🔧 Build Tips for This Model</div>
+        ${m.tips.map(t=>`<div class="bt-item"><span>→</span><span>${t}</span></div>`).join('')}
+      </div>
+    </div>
+
+    <div class="alt-rec">
+      <div class="alt-title">Also Consider</div>
+      <div class="alt-grid">
+        ${alts.map(ak=>{const am=models[ak];return`
+          <div class="alt-item">
+            <span class="alt-emoji">${am.emoji}</span>
+            <div class="alt-info">
+              <div class="alt-model">${am.name}</div>
+              <div class="alt-reason">${am.tagline}</div>
+            </div>
+            <div class="alt-price">${am.price.split(' ')[1]}</div>
+          </div>`}).join('')}
+      </div>
+    </div>
+
+    <button class="restart-btn" onclick="restart()">↩ Start Over — Retake Quiz</button>
+
+    <div class="tg-cta">
+      <div class="tg-title">You know your BMW. Now fund it smartly.</div>
+      <div class="tg-body">The best BMW is the one you can comfortably afford. DTB Academy shares <strong>free trading signals, investment tips, and income strategies</strong> to help you get there faster.</div>
+      <a href="https://t.me/DTB_Academy" target="_blank" rel="noopener noreferrer" class="tg-btn">📊 Join DTB Academy Free →</a>
+    </div>
+
+    <div class="share-card">
+      <div class="share-label">Share your result</div>
+      <div class="share-btns">
+        <button class="sb cp" onclick="copyLink(this)">📋 Copy Link</button>
+        <button class="sb wa" onclick="shareWAResult('${m.name}')">💬 WhatsApp</button>
+      </div>
+    </div>`;
+
+  res.classList.add('show');
+  setTimeout(()=>res.scrollIntoView({behavior:'smooth',block:'nearest'}),50);
+}
+
+function restart(){
+  answers = {}; currentQ = 0;
+  document.getElementById('results').classList.remove('show');
+  document.getElementById('results').innerHTML = '';
+  renderQuestion();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function copyLink(btn){
+  navigator.clipboard.writeText(window.location.href).then(()=>{
+    btn.textContent='✓ Copied!';
+    btn.style.cssText='background:rgba(0,212,255,.1);border-color:rgba(0,212,255,.3);color:#00d4ff';
+    setTimeout(()=>{btn.textContent='📋 Copy Link';btn.style.cssText='';},2200);
+  });
+}
+function shareWAResult(model){
+  const msg = encodeURIComponent(`This free BMW advisor recommended me the ${model} — find out which BMW suits you: ${window.location.href} 🚗🔥`);
+  window.open('https://wa.me/?text='+msg,'_blank');
+}
+function shareWA(){ shareWAResult('BMW'); }
+
+renderQuestion();
+</script>
+</body>
+</html>
