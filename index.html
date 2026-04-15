@@ -12,6 +12,19 @@
 <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary_large_image">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"BMW Build Advisor","description":"Quiz-based BMW model recommendation tool with pros, cons, and custom build tips based on user requirements.","url":"https://varsansri.github.io/bmw-build-advisor/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0"}}</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {"@type":"Question","name":"Which BMW model should I buy?","acceptedAnswer":{"@type":"Answer","text":"The right BMW depends on your budget, use case, style preference, and driving priority. The 3 Series is the most balanced BMW for most buyers ($43k+). The M3 is the benchmark performance saloon ($75k+). The X3 is the best family SUV ($48k+). The M2 is the most driver-focused BMW available. Use the BMW Build Advisor quiz above to get a personalised recommendation in 2 minutes."}},
+    {"@type":"Question","name":"What is the most reliable BMW to buy?","acceptedAnswer":{"@type":"Answer","text":"The BMW 3 Series (F30/G20) and X3 are considered the most reliable modern BMWs. The N20 and B48 four-cylinder engines have excellent reliability records. The ZF 8-speed automatic gearbox across the range is extremely robust. Avoid early examples of the N54 and N55 turbocharged engines unless well-maintained, as valve cover and HPFP issues are documented."}},
+    {"@type":"Question","name":"What is the best BMW for daily use?","acceptedAnswer":{"@type":"Answer","text":"The BMW 3 Series 330i is the best BMW for daily use — the ideal balance of performance, efficiency, practicality, and running cost. The 320d diesel is the most economical choice for high-mileage commuters. The i4 eDrive40 is the best daily BMW if you can charge at home."}},
+    {"@type":"Question","name":"Which BMW has the best resale value?","acceptedAnswer":{"@type":"Answer","text":"BMW M cars (M2, M3, M4) hold their value best due to limited production and high demand. The X5, X3, and 3 Series also hold value well due to popularity. Electric models like the i4 currently depreciate faster. Individual color specs and rare configurations typically hold value better than standard configs."}},
+    {"@type":"Question","name":"Is the BMW M2 or M3 better?","acceptedAnswer":{"@type":"Answer","text":"The M2 is the more focused, lighter, more visceral driver's car — smaller, cheaper, with manual gearbox available. The M3 is more practical (4 doors), faster in a straight line with xDrive, and more liveable daily. If you want pure driving joy and weekend fun, choose the M2. If you need it as your only car, choose the M3."}}
+  ]
+}
+</script>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
@@ -121,6 +134,18 @@ h2{font-size:13px;color:var(--muted);font-weight:400;margin-top:4px}
 .sticky-btn{background:var(--accent);color:#000;font-weight:800;font-size:11px;padding:8px 14px;border-radius:8px;text-decoration:none;white-space:nowrap;-webkit-tap-highlight-color:transparent}
 footer{text-align:center;padding:12px;font-size:11px;color:var(--muted);opacity:.7}
 footer a{color:var(--accent);text-decoration:none}
+.faq-section{margin-top:8px;margin-bottom:4px}
+.faq-title{font-size:14px;font-weight:700;color:var(--muted);margin-bottom:12px;padding:0 2px}
+.faq-list{display:flex;flex-direction:column;gap:6px;margin-bottom:16px}
+.faq-item{background:var(--surface);border:1px solid var(--border);border-radius:10px;overflow:hidden}
+.faq-item summary{padding:12px 16px;font-size:13px;font-weight:600;cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;-webkit-tap-highlight-color:transparent}
+.faq-item summary::after{content:'›';font-size:18px;color:var(--accent);transition:transform .2s;flex-shrink:0;margin-left:8px}
+.faq-item[open] summary::after{transform:rotate(90deg)}
+.faq-item p{padding:0 16px 12px;font-size:12px;color:var(--muted);line-height:1.6}
+.seo-text{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:18px;margin-bottom:12px}
+.seo-text h2{font-size:14px;font-weight:700;margin-bottom:10px;color:var(--text)}
+.seo-text p{font-size:12px;color:var(--muted);line-height:1.65;margin-bottom:10px}
+.seo-text p:last-child{margin-bottom:0}
 </style>
 </head>
 <body>
@@ -139,6 +164,38 @@ footer a{color:var(--accent);text-decoration:none}
 
   <div id="quizArea"></div>
   <div class="results" id="results"></div>
+
+  <section class="faq-section">
+    <h2 class="faq-title">BMW Build Advisor — Frequently Asked Questions</h2>
+    <div class="faq-list">
+      <details class="faq-item">
+        <summary>Which BMW model should I buy in 2024?</summary>
+        <p>Depends on your needs: 3 Series 330i for the best all-rounder ($43k+). M2 for pure driver's joy. X3 M40i for families wanting performance. i4 eDrive40 for daily EV use. M3 for the performance benchmark. Answer the 5 questions above for a personalised recommendation.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Is the BMW M2 or M3 better?</summary>
+        <p>M2: more focused, lighter, cheaper, manual available, ultimate driver's car. M3: 4 doors, faster with xDrive, more liveable daily. Choose M2 for weekend thrills, M3 if it's your only car and you need practicality.</p>
+      </details>
+      <details class="faq-item">
+        <summary>What is the most reliable BMW to buy?</summary>
+        <p>3 Series (G20) and X3 with the B48 four-cylinder are the most reliable modern BMWs. The ZF 8-speed automatic is extremely robust. Avoid early N54 engines without documented service history due to known HPFP and valve cover issues.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Which BMW has the best resale value?</summary>
+        <p>M cars (M2, M3, M4) hold value best due to limited production and high demand. X5, X3, and 3 Series also retain value well. Individual paint specs and rare colors typically hold better than standard configurations.</p>
+      </details>
+      <details class="faq-item">
+        <summary>What is the best BMW for a family?</summary>
+        <p>BMW X3 (M40i for performance) is the best family BMW — right size, practical boot, great rear space, standard xDrive. The 5 Series is the premium choice for families prioritising luxury and long-distance comfort. The X5 for larger families needing 7 seats.</p>
+      </details>
+    </div>
+    <div class="seo-text">
+      <h2>BMW Model Comparison Guide — Find the Best BMW for Your Requirements</h2>
+      <p>BMW produces 11+ distinct model lines in 2024, from the focused M2 to the flagship iX electric SUV. Choosing the right BMW requires matching the model to your actual lifestyle — not just what looks impressive in a showroom. A track-day enthusiast and a family of four need completely different BMWs, even at the same budget level.</p>
+      <p>This BMW Build Advisor uses a 5-question quiz to understand your budget, primary use, style preference, transmission choice, and single most important priority. The scoring system matches your answers against 11 BMW models including the M2, M3, M4, M5, 3 Series, 4 Series Gran Coupe, 5 Series, X3, X5, i4, and iX — giving you a ranked recommendation with pros, cons, and the specific options worth adding.</p>
+      <p>The build tips section is particularly important: BMW's option list can easily add $15,000–$30,000 to any model. Knowing which options are genuinely worth the money (M Carbon seats on M cars, panoramic roof on SUVs, Laserlight headlights on touring models) versus which are marketing upsells (most cosmetic packages on standard series) can save you thousands while keeping everything that matters.</p>
+    </div>
+  </section>
 
   <footer>Free BMW guide by <a href="https://t.me/DTB_Academy" target="_blank" rel="noopener">DTB Academy</a> · Not affiliated with BMW AG</footer>
 </div>
